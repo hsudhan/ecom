@@ -1,0 +1,50 @@
+{
+  "_server-fns-B_rQBe7y.js": {
+    "file": "assets/server-fns-B_rQBe7y.js",
+    "name": "server-fns",
+    "dynamicImports": [
+      "src/routes/api/[entity].ts?pick=GET",
+      "src/routes/api/[entity].ts?pick=GET",
+      "src/routes/api/[entity].ts?pick=GET",
+      "src/routes/api/[entity].ts?pick=GET",
+      "src/routes/index.tsx?pick=default&pick=$css",
+      "src/routes/index.tsx?pick=default&pick=$css",
+      "src/app.tsx"
+    ]
+  },
+  "src/app.tsx": {
+    "file": "assets/app-DJBcvgaF.js",
+    "name": "app",
+    "src": "src/app.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_server-fns-B_rQBe7y.js"
+    ],
+    "css": [
+      "assets/app-5xQs-9BO.css"
+    ]
+  },
+  "src/routes/api/[entity].ts?pick=GET": {
+    "file": "_entity_.js",
+    "name": "_entity_",
+    "src": "src/routes/api/[entity].ts?pick=GET",
+    "isEntry": true,
+    "isDynamicEntry": true
+  },
+  "src/routes/index.tsx?pick=default&pick=$css": {
+    "file": "index.js",
+    "name": "index",
+    "src": "src/routes/index.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true
+  },
+  "virtual:$vinxi/handler/server-fns": {
+    "file": "server-fns.js",
+    "name": "server-fns",
+    "src": "virtual:$vinxi/handler/server-fns",
+    "isEntry": true,
+    "imports": [
+      "_server-fns-B_rQBe7y.js"
+    ]
+  }
+}

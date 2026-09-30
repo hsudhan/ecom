@@ -1,0 +1,33 @@
+{
+  "src/routes/api/[entity].ts?pick=GET": {
+    "file": "_entity_.js",
+    "name": "_entity_",
+    "src": "src/routes/api/[entity].ts?pick=GET",
+    "isEntry": true,
+    "isDynamicEntry": true
+  },
+  "src/routes/index.tsx?pick=default&pick=$css": {
+    "file": "index.js",
+    "name": "index",
+    "src": "src/routes/index.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true
+  },
+  "virtual:$vinxi/handler/ssr": {
+    "file": "ssr.js",
+    "name": "ssr",
+    "src": "virtual:$vinxi/handler/ssr",
+    "isEntry": true,
+    "dynamicImports": [
+      "src/routes/api/[entity].ts?pick=GET",
+      "src/routes/api/[entity].ts?pick=GET",
+      "src/routes/api/[entity].ts?pick=GET",
+      "src/routes/api/[entity].ts?pick=GET",
+      "src/routes/index.tsx?pick=default&pick=$css",
+      "src/routes/index.tsx?pick=default&pick=$css"
+    ],
+    "css": [
+      "assets/ssr-5xQs-9BO.css"
+    ]
+  }
+}
