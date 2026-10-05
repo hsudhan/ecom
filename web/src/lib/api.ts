@@ -1,13 +1,13 @@
 /**
  * API client + entity registry. Fetches are same-origin against the
- * SolidStart BFF proxy (src/routes/api/[entity].ts), which forwards:
- *   orders / shipments -> Rust actix-web APIs on 4001/4002 (Redis cache)
- *   the other entities -> legacy Fastify API on 4003 (PostgreSQL)
+ * SolidStart BFF proxy (src/routes/api/[entity].ts), which forwards each
+ * entity to its Rust actix-web service on ports 4001-4008 (Redis-first with
+ * PostgreSQL fallback on cache miss).
  * Tab order matches specs.md exactly.
  */
 import { getRequestEvent, isServer } from "solid-js/web";
 
-export const API_BASE = "/api"; // SolidStart BFF proxy -> Rust (4001/4002) / legacy (4003)
+export const API_BASE = "/api"; // SolidStart BFF proxy -> Rust services (4001-4008)
 
 /**
  * Node's fetch rejects relative URLs, so during SSR the resource must call the

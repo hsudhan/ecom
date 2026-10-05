@@ -48,4 +48,6 @@ The application features a primary tab bar containing the following views:
 * Clicking the **PREVIOUS** button decrements the `page` value by `1` (floored at `1`).
 * State updates automatically trigger a fresh HTTP `GET` request to fetch and display the corresponding dataset for the selected page.
 
+* always load from ecomrust redis cache first and if cache miss load from database table
+
 %% -------------------------------------------------------------------------------------- %%

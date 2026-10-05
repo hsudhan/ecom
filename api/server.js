@@ -8,8 +8,12 @@
  *   is never interpolated into SQL identifiers.
  *
  * Endpoint pattern (specs.md):
- *   GET http://localhost:4001/orders?page=1&page_size=50
+ *   GET http://localhost:4010/orders?page=1&page_size=50
  *   -> { data, page, page_size, total_records, total_pages }
+ *
+ * Legacy fallback only: the web BFF proxy now routes every entity to the
+ * Rust Redis-first services on ports 4001-4008 (see ../ecomrust). This API
+ * remains available for direct PostgreSQL reads.
  */
 import Fastify from "fastify";
 import cors from "@fastify/cors";
@@ -19,7 +23,7 @@ const { Pool } = pg;
 
 const CONN_STRING =
   process.env.DATABASE_URL ?? "postgresql://harir@localhost:5432/ecomdb";
-const PORT = Number(process.env.API_PORT ?? 4001);
+const PORT = Number(process.env.API_PORT ?? 4010);
 
 const pool = new Pool({ connectionString: CONN_STRING });
 
