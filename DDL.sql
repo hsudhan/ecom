@@ -17,9 +17,13 @@ CREATE TABLE ecommerce.order (
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
--- Create indexes
+-- Create indexes (every sortable column is covered: the grid sorts by any column)
 CREATE INDEX idx_order_customer_id ON ecommerce.order USING btree (customer_id);
 CREATE INDEX idx_order_status ON ecommerce.order USING btree (status);
+CREATE INDEX idx_order_order_date ON ecommerce.order USING btree (order_date);
+CREATE INDEX idx_order_total_amount ON ecommerce.order USING btree (total_amount);
+CREATE INDEX idx_order_created_at ON ecommerce.order USING btree (created_at);
+CREATE INDEX idx_order_updated_at ON ecommerce.order USING btree (updated_at);
 
 -- 2. User table
 CREATE TABLE ecommerce.user (
@@ -60,9 +64,13 @@ CREATE TABLE ecommerce.shipment (
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
--- Create indexes
+-- Create indexes (every sortable column is covered: the grid sorts by any column)
 CREATE INDEX idx_shipment_order_id ON ecommerce.shipment USING btree (order_id);
 CREATE INDEX idx_shipment_shipment_status ON ecommerce.shipment USING btree (shipment_status);
+CREATE INDEX idx_shipment_shipment_date ON ecommerce.shipment USING btree (shipment_date);
+CREATE INDEX idx_shipment_shipment_cost ON ecommerce.shipment USING btree (shipment_cost);
+CREATE INDEX idx_shipment_created_at ON ecommerce.shipment USING btree (created_at);
+CREATE INDEX idx_shipment_updated_at ON ecommerce.shipment USING btree (updated_at);
 
 -- 5. Shopping Cart table
 CREATE TABLE ecommerce.shopping_cart (

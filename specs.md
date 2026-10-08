@@ -31,6 +31,10 @@ The application features a primary tab bar containing the following views:
 * **PREVIOUS** button (decrements the active page index)
 * **NEXT** button (increments the active page index)
 
+to the left side of pagination control there should be a button with display "reload cache"
+* **RELOAD CACHE** button (click event should reload redis cache of the correponding tab db table data based on the context)
+NOTE: shipment tab reload cache button click sbould reload only shipments from db table onto redis cache
+where as orders tab reload cache button click should reload only orders and so on
 
 * **Data Table:** Located below the pagination control within the `ORDERS-PANEL`.
 
@@ -47,7 +51,10 @@ The application features a primary tab bar containing the following views:
 * Clicking the **NEXT** button increments the `page` value by `1` (capped only at the upstream `total_pages`).
 * Clicking the **PREVIOUS** button decrements the `page` value by `1` (floored at `1`).
 * State updates automatically trigger a fresh HTTP `GET` request to fetch and display the corresponding dataset for the selected page.
-
 * always load from ecomrust redis cache first and if cache miss load from database table
+
+* in the orders and shipments tab, make all columns in the table sortable toggle asc and desc. start with ASC as initial state
+* ensure redis cache is optimized for sorting as well
+* ensure optimum performance in the db layer for all sortable columns
 
 %% -------------------------------------------------------------------------------------- %%

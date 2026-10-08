@@ -1,17 +1,17 @@
-var _a, _b, _c;
-const p = (_a = process.env.ORDERS_API_URL) != null ? _a : "http://localhost:4001", c = (_b = process.env.SHIPMENTS_API_URL) != null ? _b : "http://localhost:4002", s = (_c = process.env.LEGACY_API_URL) != null ? _c : "http://localhost:4003", h = { orders: { base: p, path: "/orders" }, shipments: { base: c, path: "/shipments" }, users: { base: s, path: "/users" }, logins: { base: s, path: "/logins" }, "shopping-carts": { base: s, path: "/shopping-carts" }, "payment-infos": { base: s, path: "/payment-infos" }, payments: { base: s, path: "/payments" }, "shipment-trackings": { base: s, path: "/shipment-trackings" } };
-async function i(e) {
-  var _a2;
-  const a = h[e.params.entity];
-  if (!a) return Response.json({ error: `unknown entity '${e.params.entity}'` }, { status: 404 });
-  const r = new URL(e.request.url), n = `${a.base}${a.path}${r.search}`;
+import { h } from './upstreams-BUzrzV0G2.mjs';
+
+async function u(e) {
+  var _a;
+  const s = h[e.params.entity];
+  if (!s) return Response.json({ error: `unknown entity '${e.params.entity}'` }, { status: 404 });
+  const n = new URL(e.request.url), r = `${s.base}${s.path}${n.search}`;
   try {
-    const t = await fetch(n), o = await t.text();
-    return new Response(o, { status: t.status, headers: { "content-type": (_a2 = t.headers.get("content-type")) != null ? _a2 : "application/json" } });
+    const t = await fetch(r), a = await t.text();
+    return new Response(a, { status: t.status, headers: { "content-type": (_a = t.headers.get("content-type")) != null ? _a : "application/json" } });
   } catch (t) {
-    return Response.json({ error: `upstream unreachable: ${n}`, detail: String(t) }, { status: 502 });
+    return Response.json({ error: `upstream unreachable: ${r}`, detail: String(t) }, { status: 502 });
   }
 }
 
-export { i as GET };
+export { u as GET };
 //# sourceMappingURL=_entity_.mjs.map

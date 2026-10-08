@@ -55,19 +55,19 @@ main {
 
 /* Active tab: white bg + per-entity colored outline; inactive stays plain white */
 .tab[aria-selected="true"] {
-  background: #ffffff;
-  color: var(--ink);
+  background: black;
+  color: white;
   outline: 2px solid var(--border);
   outline-offset: -2px;
 }
 
-#tab-orders[aria-selected="true"] { outline-color: red; }
-#tab-shipments[aria-selected="true"] { outline-color: blue; }
-#tab-users[aria-selected="true"] { outline-color: green; }
-#tab-logins[aria-selected="true"] { outline-color: orange; }
-#tab-shopping-carts[aria-selected="true"] { outline-color: brown; }
-#tab-payment-infos[aria-selected="true"] { outline-color: violet; }
-#tab-payments[aria-selected="true"] { outline-color: pink; }
+#tab-orders[aria-selected="true"] { outline-color: black; }
+#tab-shipments[aria-selected="true"] { outline-color: black; }
+#tab-users[aria-selected="true"] { outline-color: black; }
+#tab-logins[aria-selected="true"] { outline-color: black; }
+#tab-shopping-carts[aria-selected="true"] { outline-color: black; }
+#tab-payment-infos[aria-selected="true"] { outline-color: black; }
+#tab-payments[aria-selected="true"] { outline-color: black; }
 #tab-shipment-trackings[aria-selected="true"] { outline-color: black; }
 
 /* ------------------------------------------------------------ panel ------ */
@@ -149,7 +149,7 @@ td {
 }
 
 thead th {
-  background: #333333;
+  background: black;
   color: #ffffff;
   font-size: 11px;
   text-transform: uppercase;
@@ -157,6 +157,38 @@ thead th {
   position: sticky;
   top: 0;
   z-index: 1;
+}
+
+/* Sortable column headers (orders & shipments tabs) */
+thead th .sort-header {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+thead th .sort-header:hover {
+  text-decoration: underline;
+}
+
+thead th .sort-indicator {
+  display: inline-block;
+  width: 1em;
+  font-size: 9px;
+}
+
+/* Faint hint on hover for not-currently-sorted columns */
+thead th .sort-header:hover .sort-indicator:empty::before {
+  content: "⇅";
+  opacity: 0.5;
 }
 
 /* Alternating horizontal shading: white / light-blue rows */

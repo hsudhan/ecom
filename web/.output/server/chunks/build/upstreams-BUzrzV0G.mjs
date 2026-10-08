@@ -1,0 +1,5 @@
+var _a, _b, _c, _d, _e, _f, _g, _h;
+const s = (_a = process.env.ORDERS_API_URL) != null ? _a : "http://localhost:4001", t = (_b = process.env.SHIPMENTS_API_URL) != null ? _b : "http://localhost:4002", o = (_c = process.env.USERS_API_URL) != null ? _c : "http://localhost:4003", _ = (_d = process.env.LOGINS_API_URL) != null ? _d : "http://localhost:4004", e = (_e = process.env.SHOPPING_CARTS_API_URL) != null ? _e : "http://localhost:4005", p = (_f = process.env.PAYMENT_INFOS_API_URL) != null ? _f : "http://localhost:4006", a = (_g = process.env.PAYMENTS_API_URL) != null ? _g : "http://localhost:4007", n = (_h = process.env.SHIPMENT_TRACKINGS_API_URL) != null ? _h : "http://localhost:4008", h = { orders: { base: s, path: "/orders" }, shipments: { base: t, path: "/shipments" }, users: { base: o, path: "/users" }, logins: { base: _, path: "/logins" }, "shopping-carts": { base: e, path: "/shopping-carts" }, "payment-infos": { base: p, path: "/payment-infos" }, payments: { base: a, path: "/payments" }, "shipment-trackings": { base: n, path: "/shipment-trackings" } };
+
+export { h };
+//# sourceMappingURL=upstreams-BUzrzV0G.mjs.map

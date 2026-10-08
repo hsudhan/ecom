@@ -27,11 +27,12 @@ export const PAGE_SIZE = 50;
 export interface EntityConfig {
   id: string; // endpoint path segment
   label: string; // tab label
+  sortable?: boolean; // every column header toggles asc/desc sorting
 }
 
 export const ENTITIES: EntityConfig[] = [
-  { id: "orders", label: "ORDERS" },
-  { id: "shipments", label: "SHIPMENT" },
+  { id: "orders", label: "ORDERS", sortable: true },
+  { id: "shipments", label: "SHIPMENT", sortable: true },
   { id: "users", label: "USERS" },
   { id: "logins", label: "LOGIN" },
   { id: "shopping-carts", label: "SHOPPING CART" },
@@ -41,6 +42,7 @@ export const ENTITIES: EntityConfig[] = [
 ];
 
 export type Row = Record<string, unknown>;
+export type SortOrder = "asc" | "desc";
 
 export interface PageResult {
   data: Row[];
@@ -48,12 +50,44 @@ export interface PageResult {
   page_size: number;
   total_records: number;
   total_pages: number;
+  sort: string;
+  order: SortOrder;
 }
 
-export async function fetchPage(entity: string, page: number): Promise<PageResult> {
-  const res = await fetch(`${apiBase()}/${entity}?page=${page}&page_size=${PAGE_SIZE}`);
+/**
+ * One page of an entity, sorted by any of its columns (sortable entities:
+ * orders, shipments). Sorting happens inside the Rust service's Redis
+ * indexes; the BFF proxy forwards sort/order untouched.
+ */
+export async function fetchPage(
+  entity: string,
+  page: number,
+  sort: string = "id",
+  order: SortOrder = "asc"
+): Promise<PageResult> {
+  const res = await fetch(
+    `${apiBase()}/${entity}?page=${page}&page_size=${PAGE_SIZE}&sort=${encodeURIComponent(sort)}&order=${order}`
+  );
   if (!res.ok) {
     throw new Error(`API ${res.status}: ${await res.text()}`);
   }
   return (await res.json()) as PageResult;
+}
+
+export interface ReloadResult {
+  reloaded: number;
+  entity: string;
+}
+
+/**
+ * RELOAD CACHE button action: POSTs to the BFF proxy, which forwards to the
+ * entity's Rust service to re-fetch its full PostgreSQL table and overwrite
+ * its Redis keys. Only the given entity's cache is reloaded.
+ */
+export async function reloadCache(entity: string): Promise<ReloadResult> {
+  const res = await fetch(`${apiBase()}/${entity}/reload-cache`, { method: "POST" });
+  if (!res.ok) {
+    throw new Error(`API ${res.status}: ${await res.text()}`);
+  }
+  return (await res.json()) as ReloadResult;
 }
